@@ -1,0 +1,8 @@
+.avertissement {
+    color:red;
+    font-size:large;
+    font-weight:bold;
+    font-variant:small-caps
+ }
+ .gris{
+    background-color: grey; border:solid 1px white; padding-top:15px; padding-bottom:15px;}
