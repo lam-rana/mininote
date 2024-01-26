@@ -4,11 +4,10 @@ if(array_key_exists('page',$_GET)){
     $askedPage = $_GET['page'];
 }
 if(!checkPage($askedPage)){
-    $askedPage ='acceuil';
+    $askedPage ='accueil';
 }
 $title = getPageTitle($askedPage);
     generateHTMLHeader($title);
-  
     Menu();
     require("Content/content_$askedPage.php");
 ?>
