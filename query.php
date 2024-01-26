@@ -2,7 +2,7 @@
 
 class Utilisateur {
     public $login;
-    public $password;
+    public $mdp;
     public $name;
     public $surname;
     public $promotion;
@@ -11,13 +11,13 @@ class Utilisateur {
     public $feuille;
 
     public function __toString() {
-        return "[$this->login] $this->password $this->surname $this->name, né le $this->naissance X$this->promotion, $this->email\n";
+        return "[$this->login] $this->mdp $this->surname $this->name, né le $this->naissance X$this->promotion, $this->email\n";
     }
 
     public static function getUser($dbh, $login){
         $query = "SELECT * FROM `utilisateurs` WHERE `login` = '$login'";
         $sth = $dbh->prepare($query);
-        $sth->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
         $request_succeeded = $sth->execute();
         if ($request_succeeded){
             $user = $sth->fetch();
@@ -30,7 +30,7 @@ class Utilisateur {
     public static function insertUser($dbh, $login, $mdp, $nom, $prenom, $promotion, $naissance, $email, $feuille){
         try{
             $sth = $dbh->prepare('INSERT INTO `utilisateurs` (`login`, `mdp`, `nom`, `prenom`, `promotion`, `naissance`, `email`, `feuille`) VALUES(?,?,?,?,?,?,?,?)');
-            $sth->execute(array($login,password_hash($mdp, PASSWORD_DEFAULT), $nom, $prenom, $promotion, $naissance, $email, $feuille));
+            $sth->execute(array($login, password_hash($mdp, PASSWORD_DEFAULT), $nom, $prenom, $promotion, $naissance, $email, $feuille));
         } catch (PDOException $e) {
             echo 'User is already here: ' . $e->getMessage();
             exit(0);
@@ -45,7 +45,7 @@ class Utilisateur {
                 return False;
             }
 
-            if (password_verify($mdp, $user->password)){
+            if (password_verify($mdp, $user->mdp)){
                 echo "Passwords match";
                 return True;
             } else {
