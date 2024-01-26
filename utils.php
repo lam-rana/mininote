@@ -38,7 +38,7 @@ array(
 )
 );
 
-function Menu(){
+function menu(){
     global $pageList;
     echo<<<FIB
     <div class="container-fluid">
@@ -58,9 +58,9 @@ FIB;
     }
 echo<<<FIB
                 </ul>
-                <form class='form-inline d-flex '>
-                    <input class='form-control mr-sm-2' type='text' placeholder='Login' name='login'>
-                    <input class='form-control mr-sm-2' type='password' placeholder='Mot de passe' name='psw'>
+                <form action="index.php" method="get" class='form-inline d-flex '>
+                    <input class='form-control mr-sm-2' type='text' placeholder='login' name='login'>
+                    <input class='form-control mr-sm-2' type='password' placeholder='password' name='pass'>
                     <button class='btn btn-outline-light my-2 my-sm-0' type='submit'>Connexion</button>
                 </form>
                 
