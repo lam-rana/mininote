@@ -33,8 +33,11 @@ array(
 ),
 array(
     'name' => 'signup',
-    'title' => 'Inscription',
-    'menutitle' => 'Signup'
+    'title' => 'Inscription'
+),
+array(
+    'name' => 'compte',
+    'title' => 'Compte'
 )
 );
 
@@ -43,7 +46,7 @@ function menu(){
     echo<<<FIB
     <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="#">Wiki Note</a>
+        <a class="navbar-brand" href="index.php?page='accueil'">Wiki Note</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
         </button>
@@ -51,17 +54,20 @@ function menu(){
                 <ul class="navbar-nav me-auto ">
 FIB;
     foreach($pageList as $page){
+        if(array_key_exists('menutitle',$page)){
         echo"
             <li class='nav-item active'>
             <a class='nav-link' href='index.php?page={$page['name']}'>{$page['menutitle']} </a>
                     </li>";
     }
+}
 echo<<<FIB
                 </ul>
                 <form action="index.php" method="get" class='form-inline d-flex '>
-                    <input class='form-control mr-sm-2' type='text' placeholder='login' name='login'>
-                    <input class='form-control mr-sm-2' type='password' placeholder='password' name='pass'>
-                    <button class='btn btn-outline-light my-2 my-sm-0' type='submit'>Connexion</button>
+                    <input class='form-control mr-sm-2' type='text' placeholder='login' name='login'>&nbsp;&nbsp;
+                    <input class='form-control mr-sm-2' type='password' placeholder='password' name='pass'>&nbsp;&nbsp;
+                    <button class='btn btn-outline-light my-2 my-sm-0' type='submit'>Connexion</button>&nbsp;&nbsp;
+                    <a href='index.php?page=signup'><input type='button' value='Signup' class='btn btn-primary'></a>
                 </form>
                 
                       
@@ -97,4 +103,10 @@ function getPageTitle($page_name){
     }
     return "erreur";
 }  
+
+echo<<<AA
+<div id='loginform' class='modal fade'>
+ <div class='modal-dialog
+
+AA;
 ?>
