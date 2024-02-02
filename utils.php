@@ -10,6 +10,7 @@ function generateHTMLHeader($title){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/perso.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+light' rel='stylesheet' type='text/css'>
     <script src="js/bootstrap.min.js"></script>
     <link href='css/style.css' rel='stylesheet'>
@@ -64,10 +65,10 @@ FIB;
 echo<<<FIB
                 </ul>
                 <form class='form-inline d-flex '>
-                    <input class='form-control mr-sm-2' type='text' placeholder='Login' name='login'>&nbsp;&nbsp;
-                    <input class='form-control mr-sm-2' type='password' placeholder='Mot de passe' name='psw'>&nbsp;&nbsp;
-                    <button class='btn btn-outline-light my-2 my-sm-0' type='submit'>Connexion</button>&nbsp;&nbsp;
-                    <a href='index.php?page=signup'><input type='button' value='Signup' class='btn btn-primary'></a>
+                   <button class='btn btn-primary my-2 my-sm-0' type='button' data-bs-toggle='modal' data-bs-target='#logindemo'>Connexion</button>&nbsp;&nbsp;
+                    <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#signupdemo'>
+                    Signup
+                    </button>
                 </form>
                 
                       
@@ -103,10 +104,80 @@ function getPageTitle($page_name){
     }
     return "erreur";
 }  
-
-echo<<<AA
-<div id='loginform' class='modal fade'>
- <div class='modal-dialog
+function modalsignup(){
+    echo<<<AA
+<div id='signupdemo' class='modal signup'>
+ <div class='modal-dialog modal-dialog-centered'>
+  <div class='modal-content'>
+   <div class='modal-body'>
+    <button type='button' class='btn-close btn-close-white' data-bs-dismiss='modal'>
+    </button>
+    <div class='myform bg-dark'>
+    <h1 class='text-center'>Signup Form</h1>
+    <form action='#'>
+    <div>
+        <label for='input_name' class='col-sm-4 control-label'>Name</label>
+        <input class='form-control' type='text' placeholder='Name' id='input_name' name='Name' require> 
+              </div>&nbsp;
+              <div class='form-group'>
+              <label for='input_Login' class='col-sm-4 control-label'>Login</label>
+              <div class='mr-sm-2'>
+                  <input class='form-control' type='text' placeholder='Login' id='imput_login' name='login' require></div>
+              </div> 
+              <div class='form-group'>
+              <label for='input_mdp' class='col-sm-4 control-label'>Mot de Passe</label>
+              <div class='mr-sm-2'>
+                <input class='form-control' type='password' placeholder='Mot de passe' id='input_mdp' name='psw'></div>
+              </div> 
+              <div class='form-group'>
+              <label for='input_mdp2' class='control-label'>confirmer Mot de Passe</label>
+              <div class='mr-sm-2'>  
+                <input class='form-control mr-sm-2' type='password' placeholder='Confirmation Mot de passe' id='input_mdp2' name='psw2'></div> 
+                </div>
+            <button type='button' class='btn btn-light mt-3'>Signup</button>
+            <p>Vous avez un compte?<button class='btn1 btn-primary' type='button' data-bs-toggle='modal' data-bs-target='#logindemo'>Connexion</button></a></p>
+        </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
 
 AA;
+}
+
+function modalconnexion(){
+    echo<<<AA
+    
+
+<div id='logindemo' class='modal Login'>
+ <div class='modal-dialog modal-dialog-centered'>
+  <div class='modal-content'>
+   <div class='modal-body'>
+    <button type='button' class='btn-close btn-close-white' data-bs-dismiss='modal'>
+    </button>
+    <div class='myform bg-dark'>
+    <h1 class='text-center'>Connexion</h1>
+    <form action='#'>
+        <div class='form-group'>
+        <label for='input_Login' class='col-sm-4 control-label'>Login</label>
+            <div class='mr-sm-2'>
+                  <input class='form-control' type='text' placeholder='Login' id='imput_login' name='login' require></div>
+            </div> 
+              <div class='form-group'>
+              <label for='input_mdp' class='col-sm-4 control-label'>Mot de Passe</label>
+              <div class='mr-sm-2'>
+                <input class='form-control' type='password' placeholder='Mot de passe' id='input_mdp' name='psw'></div>
+              </div> 
+            <button type='button' class='btn btn-light mt-3'>Connexion</button>
+            < <p>Vous n'avez pas de compte?<button class='btn1 btn-primary' type='button' data-bs-toggle='modal' data-bs-target='#signupdemo'>Signup</button></a></p>
+        </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+AA;
+}
 ?>

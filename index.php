@@ -9,7 +9,10 @@ if(!checkPage($askedPage)){
 $title = getPageTitle($askedPage);
     generateHTMLHeader($title);
     Menu();
+
     require("Content/content_$askedPage.php");
+    modalsignup();
+    modalconnexion();
 ?>
     
 <?php
