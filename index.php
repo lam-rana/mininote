@@ -34,7 +34,7 @@ $title = getPageTitle($askedPage);
 
     Menu();
 
-    require("Content/content_$askedPage.php");
+    require("content/content_$askedPage.php");
     modalsignup();
     modalconnexion($askedPage);
 ?>

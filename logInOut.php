@@ -2,7 +2,6 @@
 require ("query.php");
 
 function logIn($dbh){
-  
     // print($_SESSION['loggedIn']);
 
         if(isset($_POST["login"]) && $_POST["login"] != "" && isset($_POST["psw"])) {
