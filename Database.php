@@ -2,7 +2,7 @@
 
 class Database {
     public static function connect() {
-        $dsn = 'mysql:dbname=mydb;host=127.0.0.1'; #base0 pour ta base
+        $dsn = 'mysql:dbname=base0;host=127.0.0.1'; #base0 pour ta base
         $user = 'root';
         $password = '';
         $dbh = null;

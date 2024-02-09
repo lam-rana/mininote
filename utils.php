@@ -14,7 +14,8 @@ function generateHTMLHeader($title){
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+light' rel='stylesheet' type='text/css'>
     <script src="js/bootstrap.min.js"></script>
     <link href='css/style.css' rel='stylesheet'>
-    <script src="js/jquery.min.js"></script>  
+    <script src="js/jquery.min.js"></script>
+    
     </head>
  
     <body>

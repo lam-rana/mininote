@@ -83,3 +83,17 @@ p{
 p a:hover{
    color:blue;
 }
+
+.form-control.sucess input{
+   border-color: #09c372;
+}
+
+.form-control.error input{
+   border-color: #ff3860;
+}
+
+.form-control .error input{
+   border-color: #ff3860;
+   font-size: 9px;
+   height: 13px;
+}
