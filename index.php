@@ -1,6 +1,7 @@
 <?php 
-session_name("lam");
+session_name("user");
 session_start();
+
 if(!isset($_SESSION['initiated'])){
     session_regenerate_id();
     $_SESSION['initiated'] = true;
@@ -9,9 +10,11 @@ if(!isset($_SESSION['initiated'])){
 require('utils.php');
 require('Database.php');
 require('logInOut.php');
+//require('menu.php');
+
 //require('printForms.php');
 
-$dbh = Database::connect();
+$dbh = MininoteDatabase::connect();
 
 if(array_key_exists('todo',$_GET) && $_GET['todo']=='login'){
     logIn($dbh);
@@ -23,11 +26,9 @@ if(array_key_exists('todo',$_GET) && $_GET['todo']=='logout'){
  
 $askedPage= "accueil";
 
-
 if(array_key_exists('page',$_GET)){
     $askedPage = $_GET['page'];
 }
-
 
 
 if(!checkPage($askedPage)){
@@ -36,17 +37,19 @@ if(!checkPage($askedPage)){
 
 
 $title = getPageTitle($askedPage);
-    generateHTMLHeader($title);
+generateHTMLHeader($title);
 
-    Menu();
+Menu();
 
-    require("content/content_$askedPage.php");
-    require('content/homepage_logged.php');
+require("content/$askedPage.php");
+//require('content/homepage_logged.php');
 
-    modalsignup();
-    modalconnexion($askedPage);
+modalsignup();
+modalconnexion($askedPage);
+
 ?>
     
+
 
 <?php
     generateHTMLFooter();

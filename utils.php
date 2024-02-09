@@ -24,23 +24,23 @@ CHAINE_DE_FIN;
 
 $pageList = array(
     array(
-    'name' => 'accueil',
-    'title' => 'Accueil site',
-    'menutitle' => 'Accueil'
+        'name' => 'accueil',
+        'title' => 'Accueil site',
+        'menutitle' => 'Accueil'
     ),
-array(
-    'name' => 'info',
-    'title' => 'Info',
-    'menutitle' => 'Contact'
-),
-array(
-    'name' => 'signup',
-    'title' => 'Inscription'
-),
-array(
-    'name' => 'compte',
-    'title' => 'Compte'
-)
+    array(
+        'name' => 'info',
+        'title' => 'Info',
+        'menutitle' => 'Contact'
+    ),
+    array(
+        'name' => 'signup',
+        'title' => 'Inscription'
+    ),
+    array(
+        'name' => 'compte',
+        'title' => 'Compte'
+    )
 );
 
 function Menu(){
@@ -76,6 +76,9 @@ echo "FIB
         </div>
     </nav> ";   
  }
+
+
+
 function generateHTMLFooter(){
     echo<<<CHAINE
     </body>

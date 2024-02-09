@@ -14,8 +14,8 @@ function logIn($dbh){
            // print_r($pass);
 
 //        $logged = User::checkPass($dbh, $login, $pass);
-            $user = Utilisateur::getUser($dbh,$login);
-            $mdp = Utilisateur::checkPass($dbh, $login, $pass);
+            $user = MininoteUser::getUser($dbh,$login);
+            $mdp = MininoteUser::checkPass($dbh, $login, $pass);
 //        print_r($logged);
             if(!($user == null) && $mdp) {
                 $_SESSION['loggedIn'] = true;
