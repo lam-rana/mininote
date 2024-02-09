@@ -2,29 +2,32 @@
 require ("query.php");
 
 function logIn($dbh){
-    print($_SESSION['loggedIn']);
+    // print($_SESSION['loggedIn']);
 
-    if(isset($_SESSION['loggedIn']) && !$_SESSION['loggedIn']){
-        if(isset($_GET["login"]) && $_GET["login"] != "" && isset($_GET["pass"])) {
-
+        if(isset($_POST["login"]) && $_POST["login"] != "" && isset($_POST["psw"])) {
 //        require('../TD3/query.php');
 //            require('query.php');
 
-            $login = $_GET["login"];
-            $pass = $_GET["pass"];
+            $login = $_POST["login"];
+            $pass = $_POST["psw"];
 
-            print_r($pass);
+           // print_r($pass);
 
 //        $logged = User::checkPass($dbh, $login, $pass);
-            $_SESSION['loggedIn'] = Utilisateur::checkPass($dbh, $login, $pass);
+            $user = Utilisateur::getUser($dbh,$login);
+            $mdp = Utilisateur::checkPass($dbh, $login, $pass);
 //        print_r($logged);
+            if(!($user == null) && $mdp) {
+                $_SESSION['loggedIn'] = true;
+            }
 
         }
-    }
+    
 
 }
 
 function logOut(){
+    $_SESSION['loggedIn'] = false;
     unset($_SESSION['loggedIn']);
 }
 

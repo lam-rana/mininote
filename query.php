@@ -21,7 +21,7 @@ class Utilisateur {
         $request_succeeded = $sth->execute();
         if ($request_succeeded){
             $user = $sth->fetch();
-            print($user);
+            //print($user);
             return $user;
         }
         else return NULL;
@@ -41,20 +41,20 @@ class Utilisateur {
         try {$user = Utilisateur::getUser($dbh, $login);
 
             if ($user == NULL){
-                echo 'User is not found';
+                //echo 'User is not found';
                 return False;
             }
 
             if (password_verify($mdp, $user->mdp)){
-                echo "Passwords match";
+                //echo "Passwords match";
                 return True;
             } else {
-                echo "Passwords do not match";
+                //echo "Passwords do not match";
                 return False;
             }
 
         } catch (PDOException $e) {
-            echo 'User is not found: ' . $e->getMessage();
+           // echo 'User is not found: ' . $e->getMessage();
             exit(0);
         }
     }
