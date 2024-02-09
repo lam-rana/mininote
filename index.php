@@ -1,6 +1,7 @@
 <?php 
-session_name("lam");
+session_name("user");
 session_start();
+
 if(!isset($_SESSION['initiated'])){
     session_regenerate_id();
     $_SESSION['initiated'] = true;
@@ -11,7 +12,7 @@ require('Database.php');
 require('logInOut.php');
 //require('printForms.php');
 
-$dbh = Database::connect();
+$dbh = MininoteDatabase::connect();
 
 if(array_key_exists('todo',$_GET) && $_GET['todo']=='login'){
     logIn($dbh);
@@ -23,11 +24,9 @@ if(array_key_exists('todo',$_GET) && $_GET['todo']=='logout'){
  
 $askedPage= "accueil";
 
-
 if(array_key_exists('page',$_GET)){
     $askedPage = $_GET['page'];
 }
-
 
 
 if(!checkPage($askedPage)){

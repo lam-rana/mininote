@@ -103,6 +103,105 @@ class Utilisateur {
 
 }
 
+class MininoteUser {
+    public $login;
+    public $pass;
+    public $name;
+    public $id;
+
+    public function __toString() {
+        return "[$this->login] $this->pass $this->name \n";
+    }
+
+    public static function getUser($dbh, $login){
+        $query = "SELECT * FROM `users` WHERE `Login` = '$login'";
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'MininoteUser');
+        $request_succeeded = $sth->execute();
+        if ($request_succeeded){
+            $user = $sth->fetch();
+            return $user;
+        }
+        else return NULL;
+    }
+
+    public static function insertUser($dbh, $login, $pass, $name){
+        try{
+            $sth = $dbh->prepare('INSERT INTO `users` (`Login`, `Pass`, `Name`) VALUES(?,?,?)');
+            $sth->execute(array($login, password_hash($pass, PASSWORD_DEFAULT), $name));
+        } catch (PDOException $e) {
+            echo 'User is already here: ' . $e->getMessage();
+            exit(0);
+        }
+    }
+
+    public static function checkPass($dbh, $login, $pass){
+        try {$user = MininoteUser::getUser($dbh, $login);
+
+            if ($user == NULL){
+                //echo 'User is not found';
+                return False;
+            }
+
+            if (password_verify($pass, $user->pass)){
+                //echo "Passwords match";
+                return True;
+            } else {
+                //echo "Passwords do not match";
+                return False;
+            }
+
+        } catch (PDOException $e) {
+            // echo 'User is not found: ' . $e->getMessage();
+            exit(0);
+        }
+    }
+
+    public static function findFriendsNames($dbh, $login){
+        $query = "SELECT login2 FROM `amis` WHERE `login1` = '$login'";
+        $sth = $dbh->prepare($query);
+//        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $request_succeeded = $sth->execute();
+
+//        if ($request_succeeded){
+//            while($user = $sth->fetchAll())){
+//                echo $user->login;
+//            }
+//        }
+//        else return NULL;
+
+        if ($request_succeeded) {
+            print_r($sth->fetchAll(PDO::FETCH_COLUMN, 0));
+            $arr = $sth->fetchAll(PDO::FETCH_COLUMN, 0);
+//            foreach ($arr as $key => $value){
+//                echo $value;
+//            }
+            return $arr; #FINISH
+        }
+        else return NULL;
+    }
+
+    public static function findFriends($dbh, $login){
+        $query = "SELECT utilisateurs.login, utilisateurs.mdp,utilisateurs.nom,utilisateurs.prenom FROM `amis` JOIN `utilisateurs` ON amis.login1 = '$login' AND utilisateurs.login = amis.login2";
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
+        $request_succeeded = $sth->execute();
+
+//        if ($request_succeeded){
+//            while($user = $sth->fetchAll()){
+//                echo $user;
+//            }
+//        }
+//        else return NULL;
+        if ($request_succeeded) {
+            print_r($sth->fetchAll());
+        }
+        else return NULL;
+    }
+
+}
+
+
 
 function insertUser($dbh, $login, $mdp, $nom, $prenom, $promotion, $naissance, $email, $feuille){
     $sth = $dbh->prepare('INSERT INTO `utilisateurs` (`login`, `mdp`, `nom`, `prenom`, `promotion`, `naissance`, `email`, `feuille`) VALUES(?,?,?,?,?,?,?,?)');
@@ -131,5 +230,12 @@ function smartqueryDB($dbh, $query){
         }
     }
 }
+
+require("Database.php");
+
+$dbh = MininoteDatabase::connect();
+
+MininoteUser::insertUser($dbh, "isai", "secret", "Isai");
+$dbh = null;
 
 ?>
