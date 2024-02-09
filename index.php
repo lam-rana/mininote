@@ -23,7 +23,6 @@ if(array_key_exists('todo',$_GET) && $_GET['todo']=='logout'){
  
 $askedPage= "accueil";
 
-require('content/homepage_logged.php');
 
 if(array_key_exists('page',$_GET)){
     $askedPage = $_GET['page'];
@@ -33,7 +32,6 @@ if(array_key_exists('page',$_GET)){
 
 if(!checkPage($askedPage)){
     $askedPage ='accueil';
-    
 }
 
 
@@ -43,6 +41,8 @@ $title = getPageTitle($askedPage);
     Menu();
 
     require("content/content_$askedPage.php");
+    require('content/homepage_logged.php');
+
     modalsignup();
     modalconnexion($askedPage);
 ?>
