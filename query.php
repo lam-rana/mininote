@@ -103,18 +103,23 @@ class Utilisateur {
 
 }
 
-class MininoteUser {
+abstract class MininoteUserAbstract {
+    public $id;
     public $login;
     public $pass;
     public $name;
-    public $id;
+
+}
+
+class MininoteUser extends MininoteUserAbstract {
+
 
     public function __toString() {
         return "[$this->login] $this->pass $this->name \n";
     }
 
     public static function getUser($dbh, $login){
-        $query = "SELECT * FROM `users` WHERE `Login` = '$login'";
+        $query = "SELECT * FROM `Users` WHERE `login` = '$login'";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS, 'MininoteUser');
         $request_succeeded = $sth->execute();
@@ -142,12 +147,11 @@ class MininoteUser {
                 //echo 'User is not found';
                 return False;
             }
-
             if (password_verify($pass, $user->pass)){
-                //echo "Passwords match";
+//                echo "Passwords match\n";
                 return True;
             } else {
-                //echo "Passwords do not match";
+//                echo "Passwords do not match\n";
                 return False;
             }
 
@@ -231,11 +235,13 @@ function smartqueryDB($dbh, $query){
     }
 }
 
-require("Database.php");
+//require("Database.php");
 
-$dbh = MininoteDatabase::connect();
+//$dbh = MininoteDatabase::connect();
 
-MininoteUser::insertUser($dbh, "isai", "secret", "Isai");
-$dbh = null;
+//MininoteUser::getUser($dbh, "isai");
+//MininoteUser::checkPass($dbh, "isai", "secret");
+
+//$dbh = null;
 
 ?>

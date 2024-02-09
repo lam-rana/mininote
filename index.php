@@ -10,6 +10,8 @@ if(!isset($_SESSION['initiated'])){
 require('utils.php');
 require('Database.php');
 require('logInOut.php');
+//require('menu.php');
+
 //require('printForms.php');
 
 $dbh = MininoteDatabase::connect();
@@ -35,17 +37,19 @@ if(!checkPage($askedPage)){
 
 
 $title = getPageTitle($askedPage);
-    generateHTMLHeader($title);
+generateHTMLHeader($title);
 
-    Menu();
+Menu();
 
-    require("content/content_$askedPage.php");
-    require('content/homepage_logged.php');
+require("content/$askedPage.php");
+//require('content/homepage_logged.php');
 
-    modalsignup();
-    modalconnexion($askedPage);
+modalsignup();
+modalconnexion($askedPage);
+
 ?>
     
+
 
 <?php
     generateHTMLFooter();
